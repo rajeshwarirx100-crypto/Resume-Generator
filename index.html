@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Resume Generator</title>
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet"
+  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
+
+  <!-- html2pdf -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+
+  <style>
+
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
+      font-family:Arial, Helvetica, sans-serif;
+    }
+
+    body{
+      background:#7b2ff7;
+      padding:15px;
+      background: url('https://image.slidesdocs.com/responsive-images/slides/0-simple-micro-tech-pure-blue-report-plan-summary-work-micro-technology-powerpoint-background_6130d97d82__960_540.jpg');
+      background-size: cover;
+      background-position: center;
+    }
+
+    /* HEADER */
+
+    .header{
+
+      color: #e2e8f0;
+      text-align:center;
+      padding:18px;
+      font-size: 3em;
+      font-weight:bold;
+      border-radius:10px;
+      margin-bottom:20px;
+      font-family: Georgia, 'Times New Roman', Times, serif;
+    }
+     
+
+    .container{
+      display:flex;
+      gap:20px;
+      flex-wrap:wrap;
+      background-color: black;
+      background: transparent;
+      backdrop-filter: blur(5px);
+    }
+
+    /* FORM SECTION */
+
+    .form-section{
+      flex:1;
+      min-width:320px;
+      padding:25px;
+      border-radius:12px;
+      box-shadow:0 3px 9px rgba(16, 48, 193, 0.1);
+      background: transparent;
+      backdrop-filter: blur(5px);
+      box-shadow: 0 0 15px rgba(40, 100, 235, 1);
+  
+    }
+
+    .form-title{
+      font-size:25px;
+      color:#e2e8f0;
+      margin-bottom:25px;
+      display:flex;
+      align-items:center;
+      gap:10px;
+      font-weight:bold;
+      font-family: Georgia, 'Times New Roman', Times, serif;
+
+    }
+
+    .form-group{
+      margin-bottom:18px;
+      transition: .5s;
+      color: #e2e8f0;
+    }
+
+    .form-group label{
+      display:block;
+      margin-bottom:8px;
+      font-weight:bold;
+      font-size:15px;
+      font-family: Georgia, 'Times New Roman', Times, serif;
+     
+    }
+
+    .form-group input,
+    .form-group textarea{
+      width:100%;
+      padding:12px;
+      border:1px solid #ddd;
+      border-radius:6px;
+      font-size:15px;
+      outline:none;
+      font-family: Georgia, 'Times New Roman', Times, serif;
+    }
+
+    textarea{
+      resize:none;
+      height:90px;
+    }
+
+    .btn{
+      width:100%;
+      padding:14px;
+      border:none;
+      border-radius:8px;
+      background:#3454d1;
+      color:#e2e8f0;
+      font-size:18px;
+      cursor:pointer;
+      font-weight:bold;
+      margin-top:10px;
+      box-shadow: 0 0 35px rgb(66, 67, 75);
+  
+    }
+
+    .btn:hover{
+      opacity: 2;
+      border: none;
+      outline: none;
+      font-family: Georgia, 'Times New Roman', Times, serif;
+    
+    }
+
+    /* RESUME SECTION */
+
+    .resume-section{
+      flex:1.3;
+      min-width:350px;
+      background : url('https://i.pinimg.com/236x/ae/a4/d6/aea4d61eefe73e341660ec17118ec0fe.jpg');
+      padding:30px;
+      border-radius:10px;
+      box-shadow:0 2px 8px rgba(17, 16, 16, 0.1);
+      background-size: cover;
+      background-position: center;
+      box-shadow: 0 0 15px rgba(40, 100, 235, 1);
+    }
+
+    .top{
+      display:flex;
+      align-items:center;
+      gap:25px;
+      margin-bottom:20px;
+    }
+
+    .top img{
+      width:140px;
+      height:140px;
+      border-radius:50%;
+      object-fit:cover;
+    }
+
+    .name{
+      font-size:40px;
+      font-weight:bold;
+      color:#111;
+      font-family: Georgia, 'Times New Roman', Times, serif;
+    }
+
+    .role{
+      color:#0c1251;
+      font-size:25px;
+      font-weight:bold;
+      margin:10px 0;
+      font-family: Georgia, 'Times New Roman', Times, serif;
+    }
+
+    .info{
+      line-height:32px;
+      color:#0c1251;
+      font-size:20px;
+      font-family: Georgia, 'Times New Roman', Times, serif;
+    }
+
+    .info i{
+      margin-right:10px;
+    }
+
+    hr{
+      margin:18px 0;
+      border:0.5px solid #ddd;
+    }
+
+    .section{
+      margin-bottom:20px;
+    }
+
+    .section-title{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      color:#0c1251;
+      font-size:22px;
+      font-weight:bold;
+      margin-bottom:10px;
+    
+    }
+
+    .icon{
+      width:42px;
+      height:42px;
+      background: #0c1251;
+      
+      color:white;
+      border-radius:50%;
+      display:flex;
+      justify-content:center;
+      align-items:center;
+    }
+
+    .section p{
+      font-size:17px;
+      line-height:28px;
+      color:#333;
+      overflow-x: hidden;
+      overflow-y: auto;
+      margin: 0;
+    }
+
+    .section p::-webkit-scrollbar{
+      width: 0;
+    }
+
+    .download-btn
+    {
+      display:block;
+      width:300px;
+      margin:20px auto 0;
+      text-align:center;
+      background:#0c1251;
+      color:#e2e8f0;
+      padding:15px;
+      border-radius:8px;
+      text-decoration:none;
+      font-size:22px;
+      font-weight:bold;
+      cursor:pointer;
+      border:none;
+      font-family: Georgia, 'Times New Roman', Times, serif;
+      box-shadow: 0 0 15px rgb(31, 36, 49);
+    }
+
+    .download-btn i{
+      margin-right:10px;
+    }
+
+    @media(max-width:900px){
+
+      .container{
+        flex-direction:column;
+      }
+
+      .top{
+        flex-direction:column;
+        text-align:center;
+      }
+
+      .name{
+        font-size:30px;
+      }
+
+      .role{
+        font-size:20px;
+      }
+
+    }
+
+  </style>
+</head>
+
+<body>
+
+  <!-- HEADER -->
+  <div class="header">
+   Resume Generator
+  </div>
+
+  <div class="container">
+
+    <!-- LEFT FORM -->
+    <div class="form-section">
+
+      <div class="form-title">
+        <i class="fa-solid fa-user"></i>
+        Enter Your Details
+      </div>
+
+      <div class="form-group">
+        <label>Full Name</label>
+        <input type="text" id="fullName" placeholder="Enter your name">
+      </div>
+
+      <div class="form-group">
+        <label>Job Role</label>
+        <input type="text" id="jobRole" placeholder="Frontend Developer">
+      </div>
+
+      <div class="form-group">
+        <label>Email</label>
+        <input type="email" id="email" placeholder="Enter email">
+      </div>
+
+      <div class="form-group">
+        <label>Phone Number</label>
+        <input type="text" id="phone" placeholder="Enter phone number">
+      </div>
+
+      <div class="form-group">
+        <label>Location</label>
+        <input type="text" id="location" placeholder="India">
+      </div>
+
+      <div class="form-group">
+        <label>Profile Image URL</label>
+        <input type="text" id="image"
+        placeholder="Paste image URL">
+      </div>
+
+      <div class="form-group">
+        <label>About You</label>
+        <textarea id="about"></textarea>
+      </div>
+
+      <div class="form-group">
+        <label>Skills</label>
+        <input type="text" id="skills"
+        placeholder="HTML, CSS, JavaScript">
+      </div>
+
+      <div class="form-group">
+        <label>Education</label>
+        <input type="text" id="education">
+      </div>
+
+      <div class="form-group">
+        <label>Experience</label>
+        <input type="text" id="experience">
+      </div>
+
+      <button class="btn" onclick="generateResume()">
+        Generate Resume
+      </button>
+
+    </div>
+
+    <!-- RIGHT RESUME -->
+    <div class="resume-section" id="resume">
+
+      <div class="top">
+
+        <img id="resumeImage"
+        src="https://i.pravatar.cc/300"
+        alt="profile">
+
+        <div>
+
+          <div class="name" id="resumeName">
+            Your Name
+          </div>
+
+          <div class="role" id="resumeRole">
+            YOUR ROLE
+          </div>
+
+          <div class="info">
+
+            <div>
+              <i class="fa-solid fa-envelope"></i>
+              <span id="resumeEmail">example@gmail.com</span>
+            </div>
+
+            <div>
+              <i class="fa-solid fa-phone"></i>
+              <span id="resumePhone">9876543210</span>
+            </div>
+
+            <div>
+              <i class="fa-solid fa-location-dot"></i>
+              <span id="resumeLocation">India</span>
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+      <hr>
+
+      <!-- ABOUT -->
+      <div class="section">
+
+        <div class="section-title">
+          <div class="icon">
+            <i class="fa-solid fa-user"></i>
+          </div>
+          ABOUT ME
+        </div>
+
+        <p id="resumeAbout">
+          Write something about yourself.
+        </p>
+
+      </div>
+
+      <hr>
+
+      <!-- SKILLS -->
+      <div class="section">
+
+        <div class="section-title">
+          <div class="icon">
+            <i class="fa-solid fa-code"></i>
+          </div>
+          SKILLS
+        </div>
+
+        <p id="resumeSkills">
+          HTML, CSS, JavaScript
+        </p>
+
+      </div>
+
+      <hr>
+
+      <!-- EDUCATION -->
+      <div class="section">
+
+        <div class="section-title">
+          <div class="icon">
+            <i class="fa-solid fa-graduation-cap"></i>
+          </div>
+          EDUCATION
+        </div>
+
+        <p id="resumeEducation">
+          Your Education
+        </p>
+
+      </div>
+
+      <hr>
+
+      <!-- EXPERIENCE -->
+      <div class="section">
+
+        <div class="section-title">
+          <div class="icon">
+            <i class="fa-solid fa-briefcase"></i>
+          </div>
+          EXPERIENCE
+        </div>
+
+        <p id="resumeExperience">
+          Your Experience
+        </p>
+
+      </div>
+
+      <button class="download-btn" onclick="downloadResume()">
+        <i class="fa-solid fa-download"></i>
+        Download Resume
+      </button>
+
+    </div>
+
+  </div>
+
+  <script>
+
+    // GENERATE RESUME
+
+    function generateResume(){
+
+      document.getElementById("resumeName").innerText =
+      document.getElementById("fullName").value;
+
+      document.getElementById("resumeRole").innerText =
+      document.getElementById("jobRole").value.toUpperCase();
+
+      document.getElementById("resumeEmail").innerText =
+      document.getElementById("email").value;
+
+      document.getElementById("resumePhone").innerText =
+      document.getElementById("phone").value;
+
+      document.getElementById("resumeLocation").innerText =
+      document.getElementById("location").value;
+
+      document.getElementById("resumeAbout").innerText =
+      document.getElementById("about").value;
+
+      document.getElementById("resumeSkills").innerText =
+      document.getElementById("skills").value;
+
+      document.getElementById("resumeEducation").innerText =
+      document.getElementById("education").value;
+
+      document.getElementById("resumeExperience").innerText =
+      document.getElementById("experience").value;
+
+      // IMAGE
+
+      let imageUrl = document.getElementById("image").value;
+
+      if(imageUrl !== ""){
+        document.getElementById("resumeImage").src = imageUrl;
+      }
+
+    }
+
+    // DOWNLOAD PDF
+
+    function downloadResume(){
+
+      const element = document.getElementById("resume");
+
+      let options = {
+        margin: 0.5,
+        filename: 'resume.pdf',
+        image: { type: 'jpeg', quality: 1 },
+        html2canvas: { scale: 2 },
+        jsPDF: { unit: 'in', format: 'a4', orientation: 'portrait' }
+      };
+
+      html2pdf().set(options).from(element).save();
+
+    }
+
+  </script>
+
+</body>
+</html>
